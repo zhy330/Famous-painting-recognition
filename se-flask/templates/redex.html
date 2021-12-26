@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<style>
+			html,body {
+				height: 100%;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+				overflow: hidden;
+			}
+			.content {
+				height: 100%;
+				width: 100%;
+			}
+			.el-carousel__item h3 {
+				/* color: #475669;
+				font-size: 14px;
+				opacity: 0.75;
+				line-height: 400px;
+				margin: 0;
+				text-align: center; */
+			}
+			.el-carousel__item:nth-child(2n) {
+				background-color: #99a9bf;
+			}
+			.el-carousel__item:nth-child(2n+1) {
+				background-color: #d3dce6;
+			}
+			.active {
+				outline: 2px solid #00d3b7;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='app'>
+			<el-row class="content">
+				<el-col :span="18">
+					<el-carousel ref="carousel" trigger="click" :interval="5000" :height="windowHeight + 'px'" @change="changeCarousel($event)">
+						<el-carousel-item v-for="(item,index) in imgList" :key="item.id" :name="index">
+							<div style="color: #fff;position: absolute;bottom: 70px;left: 20px;">
+								<h3>{{ item.title }}</h3>
+								<p>{{item.description}}</p>
+							</div>
+							<!-- <img :src="item.imgPath" style="height: 100%;width: 100%;"> -->
+							<img class="medium" :src="item.imgPath" style="width: 100%;" :height="windowHeight + 'px'">
+						</el-carousel-item>
+					</el-carousel>
+				</el-col>
+				<el-col :span="6" style="overflow-y: scroll;position: absolute;top: 0;bottom: 0;right: 0;">
+					<div style="margin: 0 15px;">
+						<div class="title" style="text-align: right;">
+							<h1 style="text-align: right;padding-right: 10px;">图片观赏</h1>
+							<a href="" style="text-decoration: none;border-bottom: 1px dashed #99A9BF;color: #99A9BF;font-size: 14px;margin-right: 10px;">下一步操作</a>
+						</div>
+					</div>
+					<div style="margin: 30px 15px 20px 15px">
+						<el-row>
+							<el-col :span="11"  v-for="(item, index) in imgList" style="margin-right: 5px;" :key="item.id">
+								<img class="medium" @click="changeImg(item,index)" :src="item.imgPath" :class="{'active': checkIndex === index}" style="width: 100%;" height="100px">
+							</el-col>
+						</el-row>
+					</div>
+				</el-col>
+			</el-row>
+		</div>
+	</body>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return { 
+					visible: false,
+					windowHeight: '',
+					checkIndex: 0,
+					imgList: [
+						{
+							id: '1',
+							imgPath: 'img/01.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '2',
+							imgPath: 'img/02.jpg',
+							title: '图片标题2',
+							description: '图片描述1'
+						},
+						{
+							id: '3',
+							imgPath: 'img/03.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '4',
+							imgPath: 'img/04.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '5',
+							imgPath: 'img/05.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '6',
+							imgPath: 'img/06.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '7',
+							imgPath: 'img/07.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '8',
+							imgPath: 'img/08.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '9',
+							imgPath: 'img/09.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '10',
+							imgPath: 'img/10.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '11',
+							imgPath: 'img/11.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '12',
+							imgPath: 'img/12.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '13',
+							imgPath: 'img/13.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						},
+						{
+							id: '14',
+							imgPath: 'img/14.jpg',
+							title: '图片标题1',
+							description: '图片描述1'
+						}
+					]
+				}
+			},
+			created() {
+				this.windowHeight = window.innerHeight;
+				console.log('高度: ', this.windowHeight);
+			},
+			methods: {
+				changeCarousel(event) {
+					console.log('数据改变了: ', event);
+					this.checkIndex = event;
+				},
+				changeImg(item,index) {
+					this.$refs.carousel.setActiveItem(index);
+					this.checkIndex = index;
+				}
+			}
+		})
+	</script>
+</html>
